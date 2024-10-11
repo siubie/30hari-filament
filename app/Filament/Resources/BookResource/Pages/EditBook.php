@@ -10,10 +10,15 @@ class EditBook extends EditRecord
 {
     protected static string $resource = BookResource::class;
 
-    protected function getHeaderActions(): array
+    // protected function getHeaderActions(): array
+    // {
+    //     return [
+    //         Actions\DeleteAction::make(),
+    //     ];
+    // }
+
+    protected function getRedirectUrl(): string
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        return $this->getResource()::getUrl('index');
     }
 }
