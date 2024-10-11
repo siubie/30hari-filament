@@ -6,6 +6,8 @@ use App\Filament\Resources\BookResource\Pages;
 use App\Filament\Resources\BookResource\RelationManagers;
 use App\Models\Book;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,16 +28,22 @@ class BookResource extends Resource
     {
         return $form
             ->schema([
-                //add title field
-                TextInput::make('title')
-                    ->label('Title')
-                    ->required(),
-                TextInput::make('author')
-                    ->label('Author')
-                    ->required(),
-                TextInput::make('description')
-                    ->label('Description')
-                    ->required(),
+                Section::make('Book Information')
+                    ->columns(2)
+                    ->schema([
+                        //add title field
+                        TextInput::make('title')
+                            ->label('Title')
+                            ->required(),
+                        TextInput::make('author')
+                            ->label('Author')
+                            ->required(),
+                        RichEditor::make('description')
+                            ->label('Description')
+                            ->required()
+                            ->columnSpanFull(),
+                    ]),
+
             ]);
     }
 

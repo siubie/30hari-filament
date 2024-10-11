@@ -14,4 +14,9 @@ class CreateBook extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    public function createAnother(): void
+    {
+        $this->create(another: false);
+    }
 }
