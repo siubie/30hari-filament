@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('title');
             //add book author
             $table->string('author');
+            $table->string('image');
             //add book description
             $table->text('description');
+            //add book status
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
