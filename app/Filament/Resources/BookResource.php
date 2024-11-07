@@ -84,40 +84,7 @@ class BookResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                DeleteAction::make()
-                    ->requiresConfirmation()
-                    ->action(function (Model $record) {
-                        if ($record->author === 'Prof. Orville Stamm') {
-                            //show failure notification
-                            Notification::make()
-                                ->title('Operation failed')
-                                ->body('Prof. Orville Stamm cannot be deleted.')
-                                ->danger()
-                                ->send();
-                            //cancel the action
-                            return;
-                        }
-                        try {
-                            //check if the image exists in storage
-                            if (Storage::disk('public')->exists($record->image)) {
-                                //delete the image from storage
-                                Storage::disk('public')->delete($record->image);
-                            }
-                            $record->delete();
-                            //show success notification
-                            Notification::make()
-                                ->title('Deleted successfully')
-                                ->success()
-                                ->send();
-                        } catch (\Exception $e) {
-                            //show error notification
-                            Notification::make()
-                                ->title('Error')
-                                ->body('An error occurred while deleting the book.')
-                                ->danger()
-                                ->send();
-                        }
-                    }),
+                DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
