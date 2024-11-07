@@ -19,7 +19,9 @@ class Book extends Model
         //add delete event
         static::deleting(function ($book) {
             //delete image
-            Storage::disk('public')->delete($book->image);
+            if ($book->image) {
+                Storage::disk('public')->delete($book->image);
+            }
         });
     }
 }
