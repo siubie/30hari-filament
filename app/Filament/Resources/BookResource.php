@@ -9,8 +9,11 @@ use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -45,6 +48,12 @@ class BookResource extends Resource
                         //add image field
                         FileUpload::make('image')
                             ->image()
+                            ->required(),
+                        //add book-pdf upload field
+                        SpatieMediaLibraryFileUpload::make('book-pdf')
+                            ->collection('book-pdf')
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->label('Book PDF')
                             ->required(),
                         TextInput::make('author')
                             ->label('Author')
@@ -85,6 +94,7 @@ class BookResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 DeleteAction::make(),
+                Tables\Actions\ViewAction::make('View Info')
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

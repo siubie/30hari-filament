@@ -21,4 +21,10 @@ class EditBook extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['title'] = ucwords($data['title']);
+        return $data;
+    }
 }
